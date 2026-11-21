@@ -1,13 +1,14 @@
-import com.intuit.karate.junit5.Karate;
+import com.intuit.karate.Results;
+import com.intuit.karate.Runner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class PetStoreRunnerTest {
 
-    @Karate.Test
-    Karate testPetStore() {
-        //return Karate.run("classpath:pets/create-pet-standalone.feature");
-        //return Karate.run("classpath:pets/pets.feature");
-        return Karate.run("classpath:pets");
-
-
+    @Test
+    void testPetStore() {
+        Results results = Runner.path("classpath:pets")
+                .parallel(1);
+        assertEquals(0, results.getFailCount(), results.getErrorMessages());
     }
 }
